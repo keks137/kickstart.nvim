@@ -159,8 +159,6 @@ vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
-vim.keymap.set('n', '<leader>ee', '<cmd>Ex<CR>', { desc = 'open Filetree' })
-vim.keymap.set('n', '<leader>eq', '<cmd> pwd|echo <CR>', { desc = 'exit to terminal but better' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -173,13 +171,16 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set({ 'n', 't' }, '<M-j>', '<cmd>bprev<CR>')
 vim.keymap.set({ 'n', 't' }, '<M-k>', '<cmd>bnext<CR>')
 
+-- Leader e Explorer menus
+vim.keymap.set('n', '<leader>ee', '<cmd>Ex<CR>', { desc = 'Filetree [E]xplorer' })
+vim.keymap.set('n', '<leader>et', '<cmd>term<CR>', { desc = '[T]erminal' })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('n', '<leader>et', '<cmd>term<CR><C-i>fish')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 vim.keymap.set('t', '<M-q>', '<cmd>bd!<CR>', { desc = 'Exit terminal buffer' })
 
@@ -253,6 +254,11 @@ require('lazy').setup({
     -- use opts = {} for passing setup options
     -- this is equivalent to setup({}) function
   },
+  --
+  -- Harpoon
+
+  require 'custom.plugins.harpoon',
+
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
   --    require('gitsigns').setup({ ... })
@@ -331,6 +337,7 @@ require('lazy').setup({
       spec = {
         { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
+        { '<leader>e', group = '[E]xplorers' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
@@ -942,11 +949,11 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
