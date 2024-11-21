@@ -7,53 +7,67 @@ return {
     end,
     keys = {
       {
-        '<leader>A',
+        '<leader>a',
         function()
           require('harpoon.mark').add_file()
         end,
         desc = 'harpoon file',
       },
       {
-        '<leader>a',
+        '<C-e>',
         function()
           require('harpoon.ui').toggle_quick_menu()
         end,
         desc = 'harpoon quick menu',
       },
       {
-        '<leader>1',
+        '<C-1>',
         function()
           require('harpoon.ui').nav_file(1)
         end,
         desc = 'harpoon to file 1',
       },
       {
-        '<leader>2',
+        '<C-2>',
         function()
           require('harpoon.ui').nav_file(2)
         end,
         desc = 'harpoon to file 2',
       },
       {
-        '<leader>3',
+        '<C-3>',
         function()
           require('harpoon.ui').nav_file(3)
         end,
         desc = 'harpoon to file 3',
       },
       {
-        '<leader>4',
+        '<C-4>',
         function()
           require('harpoon.ui').nav_file(4)
         end,
         desc = 'harpoon to file 4',
       },
       {
-        '<leader>5',
+        '<C-5>',
         function()
           require('harpoon.ui').nav_file(5)
         end,
         desc = 'harpoon to file 5',
+      },
+      {
+        '<C-j>',
+        function()
+          require('harpoon.ui').nav_prev()
+        end,
+        desc = 'harpoon to previos file',
+      },
+      {
+        '<C-k>',
+        function()
+          require('harpoon.ui').nav_next()
+        end,
+        desc = 'harpoon to next file',
       },
     },
   },
