@@ -91,7 +91,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
@@ -247,6 +247,7 @@ require('lazy').setup({
   --
   -- Use `opts = {}` to force a plugin to be loaded.
   --
+  { 'ellisonleao/glow.nvim', config = true, cmd = 'Glow' },
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
@@ -258,6 +259,10 @@ require('lazy').setup({
   -- Harpoon
 
   require 'custom.plugins.harpoon',
+
+  -- Markdown Preview
+  require 'custom.plugins.markdow_preview',
+  require 'custom.plugins.render_markdown',
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -690,6 +695,7 @@ require('lazy').setup({
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
+            require('lspconfig').gleam.setup {}
           end,
         },
       }

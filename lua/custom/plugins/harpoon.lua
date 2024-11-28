@@ -11,7 +11,7 @@ return {
         function()
           require('harpoon.mark').add_file()
         end,
-        desc = 'harpoon file',
+        desc = 'harpoon add file',
       },
       {
         '<C-e>',
