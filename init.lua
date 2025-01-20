@@ -171,9 +171,13 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set({ 'n', 't' }, '<M-j>', '<cmd>bprev<CR>')
 vim.keymap.set({ 'n', 't' }, '<M-k>', '<cmd>bnext<CR>')
 
+-- LSP stuff
+vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
+
 -- Leader e Explorer menus
-vim.keymap.set('n', '<leader>ee', '<cmd>Ex<CR>', { desc = 'Filetree [E]xplorer' })
+vim.keymap.set('n', '<leader>ee', '<cmd>Oil<CR>', { desc = 'Filetree [E]xplorer' })
 vim.keymap.set('n', '<leader>et', '<cmd>term<CR>', { desc = '[T]erminal' })
+vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -259,6 +263,13 @@ require('lazy').setup({
   -- Harpoon
 
   require 'custom.plugins.harpoon',
+
+  -- better words
+  require 'custom.plugins.vim-wordmotion',
+
+  -- oil
+
+  require 'custom.plugins.oil',
 
   -- Markdown Preview
   require 'custom.plugins.markdow_preview',
@@ -383,6 +394,9 @@ require('lazy').setup({
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
+      -- oil
+      require('oil').setup {}
+
       -- Telescope is a fuzzy finder that comes with a lot of different things that
       -- it can fuzzy find! It's more than just a "file finder", it can search
       -- many different aspects of Neovim, your workspace, LSP, and more!
