@@ -176,7 +176,6 @@ vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
 -- Leader e Explorer menus
 vim.keymap.set('n', '<leader>ee', '<cmd>Oil<CR>', { desc = 'Filetree [E]xplorer' })
 vim.keymap.set('n', '<leader>et', '<cmd>term<CR>', { desc = '[T]erminal' })
-vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -259,12 +258,21 @@ require('lazy').setup({
     -- this is equivalent to setup({}) function
   },
   --
+
+  -- Plugins
+  require 'custom.plugins.init',
+
+  -- Bild
+  --require 'custom.plugins.bild',
+
   -- Harpoon
 
   require 'custom.plugins.harpoon',
 
   -- better words
   require 'custom.plugins.vim-wordmotion',
+
+  require 'custom.plugins.vim-office',
 
   -- oil
 
@@ -962,6 +970,8 @@ require('lazy').setup({
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
+
+  require('custom.plugins.bild.lua.bild.init').setup(vim.keymap.set('n', '-', '<CMD>Bild<CR>', { desc = 'Builds' })),
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
