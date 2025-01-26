@@ -170,6 +170,10 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set({ 'n', 't' }, '<M-j>', '<cmd>bprev<CR>')
 vim.keymap.set({ 'n', 't' }, '<M-k>', '<cmd>bnext<CR>')
 
+-- Bild
+vim.keymap.set('n', '-', '<CMD>Bild<CR>', { desc = 'Builds' })
+vim.keymap.set('n', '<leader>eb', '<CMD>BildCommandBuffer<CR>', { desc = 'Set Build Command' })
+
 -- LSP stuff
 vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
 
@@ -971,8 +975,7 @@ require('lazy').setup({
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 
-  require('custom.plugins.bild.lua.bild.init').setup(vim.keymap.set('n', '-', '<CMD>Bild<CR>', { desc = 'Builds' })),
-
+  require('custom.plugins.bild.lua.bild.init').setup(),
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
