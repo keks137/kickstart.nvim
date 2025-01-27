@@ -181,6 +181,9 @@ vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
 vim.keymap.set('n', '<leader>ee', '<cmd>Oil<CR>', { desc = 'Filetree [E]xplorer' })
 vim.keymap.set('n', '<leader>et', '<cmd>term<CR>', { desc = '[T]erminal' })
 
+vim.keymap.set('n', '<leader>td', function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { silent = true, noremap = true })
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
