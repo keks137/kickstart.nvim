@@ -156,6 +156,10 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- local plugin system
+
+Use_Local_Plugins = false
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -183,7 +187,7 @@ vim.keymap.set('n', '<leader>et', '<cmd>term<CR>', { desc = '[T]erminal' })
 
 vim.keymap.set('n', '<leader>td', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, { silent = true, noremap = true })
+end, { silent = true, noremap = true, desc = 'Toggle LSP [D]iagnostics' })
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -269,9 +273,6 @@ require('lazy').setup({
   -- Plugins
   require 'custom.plugins.init',
 
-  -- Bild
-  require 'custom.plugins.bild',
-
   -- Harpoon
 
   require 'custom.plugins.harpoon',
@@ -288,6 +289,8 @@ require('lazy').setup({
   -- Markdown Preview
   require 'custom.plugins.markdow_preview',
   require 'custom.plugins.render_markdown',
+
+  require 'custom.plugins.potentially_local_plugins',
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -978,8 +981,8 @@ require('lazy').setup({
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 
-  --temporary for debugging
-  --require('custom.plugins.bild.lua.bild.init').setup(),
+  -- load local plugins
+  require 'custom.local_plugins.init',
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
