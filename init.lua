@@ -277,8 +277,10 @@ require('lazy').setup({
 
   require 'custom.plugins.harpoon',
 
-  -- better words
-  require 'custom.plugins.vim-wordmotion',
+  -- smarter words
+  --require 'custom.plugins.vim-wordmotion',
+  --require 'custom.plugins.camelcasemotion',
+  require 'custom.plugins.spider',
 
   require 'custom.plugins.vim-office',
 
