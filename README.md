@@ -66,7 +66,7 @@ too - it's ignored in the kickstart repo to make maintenance easier, but it's
 #### Clone kickstart.nvim
 > **NOTE**
 > If following the recommended step above (i.e., forking the repo), replace
-> `nvim-lua` with `<your_github_username>` in the commands below
+> `keks137` with `<your_github_username>` in the commands below
 
 <details><summary> Linux and Mac </summary>
 
@@ -87,7 +87,7 @@ git clone https://github.com/keks137/kickstart.nvim.git "%localappdata%\nvim"
 If you're using `powershell.exe`
 
 ```
-git clone https://github.com/nvim-lua/kickstart.nvim.git "${env:LOCALAPPDATA}\nvim"
+git clone https://github.com/keks137/kickstart.nvim.git "${env:LOCALAPPDATA}\nvim"
 ```
 
 </details>
@@ -144,8 +144,8 @@ examples of adding popularly requested plugins.
     same functionality is available here:
     * [kickstart-modular.nvim](https://github.com/dam9000/kickstart-modular.nvim)
   * Discussions on this topic can be found here:
-    * [Restructure the configuration](https://github.com/nvim-lua/kickstart.nvim/issues/218)
-    * [Reorganize init.lua into a multi-file setup](https://github.com/nvim-lua/kickstart.nvim/pull/473)
+    * [Restructure the configuration](https://github.com/keks137/kickstart.nvim/issues/218)
+    * [Reorganize init.lua into a multi-file setup](https://github.com/keks137/kickstart.nvim/pull/473)
 
 ### Install Recipes
 

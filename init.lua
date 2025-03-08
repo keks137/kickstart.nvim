@@ -168,7 +168,9 @@ Use_Local_Plugins = false
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>qq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+vim.keymap.set('n', '<leader>qs', vim.lsp.buf.code_action, { desc = 'Open diagnostic [Q]ickfix [S]olution' })
 
 -- Switch between buffers with ALT + J/K
 vim.keymap.set({ 'n', 't' }, '<M-j>', '<cmd>bprev<CR>')
