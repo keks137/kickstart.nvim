@@ -234,7 +234,7 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function(args)
     local ft = vim.bo[args.buf].filetype
     if ft == 'go' then
-      vim.keymap.set('n', '<leader>qe', 'oif err != nil {<CR>}<Esc>Olog.Fatalf("error: %s\\n", err.Error())<Esc>jj', { desc = 'if err != nil' })
+      vim.keymap.set('n', '<leader>ne', 'oif err != nil {<CR>}<Esc>Olog.Fatalf("error: %s\\n", err.Error())<Esc>jj', { desc = 'if err != nil' })
     end
     -- Do something based on the value of ft
   end,
@@ -854,12 +854,12 @@ require('lazy').setup({
           -- `friendly-snippets` contains a variety of premade snippets.
           --    See the README about individual language/framework/plugin snippets:
           --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
       },
       'saadparwaiz1/cmp_luasnip',
@@ -1036,6 +1036,11 @@ require('lazy').setup({
 
   -- load local plugins
   require 'custom.local_plugins.init',
+
+  --require('luasnip').add_snippets('lua', 'custom.snippets.example.lua'),
+  --require 'custom.snippets.example',
+  --require 'custom.snippets.c',
+  --require('luasnip.loaders.from_lua').load { 'custom.snippets/c.lua' },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
