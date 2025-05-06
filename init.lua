@@ -115,7 +115,7 @@ vim.opt.showmode = false
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
+  --vim.opt.clipboard = 'unnamedplus'
 end)
 
 -- Enable break indent
@@ -186,6 +186,10 @@ vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
 -- Leader e Explorer menus
 vim.keymap.set('n', '<leader>ee', '<cmd>Oil<CR>', { desc = 'Filetree [E]xplorer' })
 vim.keymap.set('n', '<leader>et', '<cmd>term<CR>', { desc = '[T]erminal' })
+
+-- remove all other windows
+
+vim.keymap.set('n', '<leader>o', '<cmd>only<CR>', { desc = 'Make [O]nly Window' })
 
 vim.keymap.set('n', '<leader>td', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
