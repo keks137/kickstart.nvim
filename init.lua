@@ -115,7 +115,7 @@ vim.opt.showmode = false
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
-  --vim.opt.clipboard = 'unnamedplus'
+  vim.opt.clipboard = 'unnamedplus'
 end)
 
 -- Enable break indent
@@ -168,9 +168,9 @@ Use_Local_Plugins = false
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>qq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
-vim.keymap.set('n', '<leader>qs', vim.lsp.buf.code_action, { desc = 'Open diagnostic [Q]ickfix [S]olution' })
+vim.keymap.set('n', '<leader>Qs', vim.lsp.buf.code_action, { desc = 'Open diagnostic [Q]ickfix [S]olution' })
 
 -- Switch between buffers with ALT + J/K
 vim.keymap.set({ 'n', 't' }, '<M-j>', '<cmd>bprev<CR>')
@@ -178,15 +178,18 @@ vim.keymap.set({ 'n', 't' }, '<M-k>', '<cmd>bnext<CR>')
 
 -- Bild
 vim.keymap.set('n', '-', '<CMD>Bild<CR>', { desc = 'Builds' })
-vim.keymap.set('n', '<leader>eb', '<CMD>BildCommandBuffer<CR>', { desc = 'Set Build Command' })
+vim.keymap.set('n', '<leader>Eb', '<CMD>BildCommandBuffer<CR>', { desc = 'Set Build Command' })
 
 -- LSP stuff
 vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
 
 -- Leader e Explorer menus
-vim.keymap.set('n', '<leader>ee', '<cmd>Oil<CR>', { desc = 'Filetree [E]xplorer' })
-vim.keymap.set('n', '<leader>et', '<cmd>term<CR>', { desc = '[T]erminal' })
+vim.keymap.set('n', '<leader>e', '<cmd>Oil<CR>', { desc = 'Filetree [E]xplorer' })
+vim.keymap.set('n', '<leader>Et', '<cmd>term<CR>', { desc = '[T]erminal' })
 
+-- fancy yank
+
+vim.keymap.set('v', '<leader>y', '<cmd>w !wl-copy<CR>', { desc = '[Y]ank' })
 -- remove all other windows
 
 vim.keymap.set('n', '<leader>o', '<cmd>only<CR>', { desc = 'Make [O]nly Window' })
@@ -394,7 +397,7 @@ require('lazy').setup({
       spec = {
         { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
-        { '<leader>e', group = '[E]xplorers' },
+        { '<leader>E', group = '[E]xplorers' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
@@ -1055,11 +1058,11 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.autopairs',
+  --require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
