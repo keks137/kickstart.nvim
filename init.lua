@@ -198,9 +198,6 @@ vim.keymap.set('n', '<leader>td', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { silent = true, noremap = true, desc = 'Toggle LSP [D]iagnostics' })
 
--- Godot
-vim.keymap.set('n', '<leader>g', '<cmd>GodotRun<CR>', { desc = '[G]odot Run' })
-
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -1108,7 +1105,6 @@ require('lazy').setup({
 }, {})
 
 -- Other configs
-require 'custom.config.godot'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 
@@ -1171,4 +1167,50 @@ local setup_godot_dap = function()
   }
 end
 
-setup_godot_dap()
+-- Godot mode setup
+if vim.g.godot_mode then
+  -- Set up server path
+  local socket_path = vim.fn.expand '~/.cache/nvim/godot.pipe'
+  local socket_dir = vim.fn.fnamemodify(socket_path, ':h')
+
+  -- Start server if not already running
+  if #vim.fn.serverlist() == 0 then
+    local success, err = pcall(vim.fn.serverstart, socket_path)
+    if not success then
+      vim.notify('Godot server failed to start: ' .. tostring(err), vim.log.levels.WARN)
+    end
+  end
+
+  -- Godot-specific UI configuration
+  vim.opt.laststatus = 0 -- No status line
+  vim.opt.ruler = false -- No ruler
+  vim.opt.number = false -- No line numbers
+  vim.opt.relativenumber = false
+  vim.opt.scrolloff = 999 -- Center cursor vertically
+  vim.opt.showcmd = false -- No command preview
+  vim.opt.showmode = false -- No mode indicator
+  vim.opt.signcolumn = 'no' -- No sign column
+
+  -- Apply immediately on startup
+  vim.schedule(function()
+    -- Additional cleanups that need to run after UI initialization
+    vim.opt.cmdheight = 0 -- Hide command line
+    vim.opt.lazyredraw = true -- Optimize performance
+  end)
+
+  -- Godot
+  vim.keymap.set('n', '<leader>g', '<cmd>GodotRun<CR>', { desc = '[G]odot Run' })
+
+  require 'custom.config.godot'
+  setup_godot_dap()
+  -- Clean up socket on exit
+  vim.api.nvim_create_autocmd('VimLeave', {
+    once = true,
+    callback = function()
+      local ok = pcall(os.remove, socket_path)
+      if not ok then
+        vim.notify('Failed to remove Godot socket', vim.log.levels.WARN)
+      end
+    end,
+  })
+end
