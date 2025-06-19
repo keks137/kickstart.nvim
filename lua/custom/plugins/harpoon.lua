@@ -56,14 +56,14 @@ return {
         desc = 'harpoon to file 5',
       },
       {
-        '<C-j>',
+        '<PageUp>',
         function()
           require('harpoon.ui').nav_prev()
         end,
         desc = 'harpoon to previos file',
       },
       {
-        '<C-k>',
+        '<PageDown>',
         function()
           require('harpoon.ui').nav_next()
         end,

@@ -6,4 +6,10 @@ return {
   --require 'custom.plugins.vimtex',
   --require 'custom.plugins.faust',
   require 'custom.plugins.supercollider',
+  require 'custom.plugins.godot',
+  require 'custom.plugins.vim-godot',
+  --require 'custom.plugins.multicursor',
+  require 'custom.plugins.multiple-cursors',
+  require 'custom.plugins.nvim-various-textobjects',
+  --require 'custom.plugins.nvim-treesitter-textobjects',
 }

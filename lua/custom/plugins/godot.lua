@@ -1,0 +1,1 @@
+return { 'lommix/godot.nvim' }

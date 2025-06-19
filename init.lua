@@ -197,6 +197,10 @@ vim.keymap.set('n', '<leader>o', '<cmd>only<CR>', { desc = 'Make [O]nly Window' 
 vim.keymap.set('n', '<leader>td', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { silent = true, noremap = true, desc = 'Toggle LSP [D]iagnostics' })
+
+-- Godot
+vim.keymap.set('n', '<leader>g', '<cmd>GodotRun<CR>', { desc = '[G]odot Run' })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -722,8 +726,9 @@ require('lazy').setup({
       --  By default, Neovim doesn't support everything that is in the LSP specification.
       --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
+      local cmp_lsp = require 'cmp_nvim_lsp'
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      capabilities = vim.tbl_deep_extend('force', {}, vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -738,6 +743,7 @@ require('lazy').setup({
         gopls = {},
         pyright = {},
         rust_analyzer = {},
+        --gdscript = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -795,6 +801,10 @@ require('lazy').setup({
           end,
         },
       }
+      require('lspconfig').gdscript.setup { capabilities = capabilities }
+      vim.keymap.set('n', '<leader>Gg', function()
+        vim.fn.serverstart '127.0.0.1:6004'
+      end, { noremap = true, desc = 'Start [g]dscript server' })
     end,
   },
 
@@ -1095,7 +1105,70 @@ require('lazy').setup({
       lazy = '💤 ',
     },
   },
-})
+}, {})
 
+-- Other configs
+require 'custom.config.godot'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+local setup_godot_dap = function()
+  local dap = require 'dap'
+  vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
+  vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
+  vim.keymap.set('n', '<F12>', dap.continue, { desc = 'Debug: Start/Continue' })
+  vim.keymap.set('n', '<F11>', dap.step_into, { desc = 'Debug: Step Into' })
+  vim.keymap.set('n', '<F10>', dap.step_over, { desc = 'Debug: Step Over' })
+  vim.keymap.set('n', '<F8>', dap.terminate, { desc = 'Debug: Terminate' })
+  local dap = require 'dap'
+
+  dap.adapters.godot = {
+    type = 'server',
+    host = '127.0.0.1',
+    port = 6006,
+  }
+
+  dap.configurations.gdscript = {
+    {
+      launch_game_instance = false,
+      launch_scene = false,
+      name = 'Launch scene',
+      project = '${workspaceFolder}',
+      request = 'launch',
+      type = 'godot',
+    },
+  }
+
+  dap.configurations.gdscript = {
+    {
+      type = 'godot',
+      request = 'launch', -- either "launch" or "attach"
+      name = 'Launch Main Scene',
+      -- specific to gdscript
+      project = '${workspaceFolder}',
+    },
+  }
+
+  local dapui = require 'dapui'
+  dapui.setup {
+    -- Set icons to characters that are more likely to work in every terminal.
+    --    Feel free to remove or use ones that you like more! :)
+    --    Don't feel like these are good choices.
+    icons = { expanded = 'â–¾', collapsed = 'â–¸', current_frame = '*' },
+    controls = {
+      icons = {
+        pause = 'â¸',
+        play = 'â–¶',
+        step_into = 'âŽ',
+        step_over = 'â­',
+        step_out = 'â®',
+        step_back = 'b',
+        run_last = 'â–¶â–¶',
+        terminate = 'â¹',
+        disconnect = 'â',
+      },
+    },
+  }
+end
+
+setup_godot_dap()
