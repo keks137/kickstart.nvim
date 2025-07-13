@@ -156,6 +156,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+vim.o.tabstop = 4
+--vim.o.shiftwidth = 4
+
 -- local plugin system
 
 Use_Local_Plugins = false
@@ -173,8 +176,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('n', '<leader>Qs', vim.lsp.buf.code_action, { desc = 'Open diagnostic [Q]ickfix [S]olution' })
 
 -- Switch between buffers with ALT + J/K
-vim.keymap.set({ 'n', 't' }, '<M-j>', '<cmd>bprev<CR>')
-vim.keymap.set({ 'n', 't' }, '<M-k>', '<cmd>bnext<CR>')
+--vim.keymap.set({ 'n', 't' }, '<M-j>', '<cmd>bprev<CR>')
+--vim.keymap.set({ 'n', 't' }, '<M-k>', '<cmd>bnext<CR>')
 
 -- Bild
 vim.keymap.set('n', '-', '<CMD>Bild<CR>', { desc = 'Builds' })
@@ -1182,14 +1185,14 @@ if vim.g.godot_mode then
   end
 
   -- Godot-specific UI configuration
-  vim.opt.laststatus = 0 -- No status line
-  vim.opt.ruler = false -- No ruler
-  vim.opt.number = false -- No line numbers
-  vim.opt.relativenumber = false
-  vim.opt.scrolloff = 999 -- Center cursor vertically
-  vim.opt.showcmd = false -- No command preview
-  vim.opt.showmode = false -- No mode indicator
-  vim.opt.signcolumn = 'no' -- No sign column
+  --vim.opt.laststatus = 0 -- No status line
+  --vim.opt.ruler = false -- No ruler
+  --vim.opt.number = false -- No line numbers
+  --vim.opt.relativenumber = false
+  --vim.opt.scrolloff = 999 -- Center cursor vertically
+  --vim.opt.showcmd = false -- No command preview
+  --vim.opt.showmode = false -- No mode indicator
+  --vim.opt.signcolumn = 'no' -- No sign column
 
   -- Apply immediately on startup
   vim.schedule(function()
@@ -1214,3 +1217,9 @@ if vim.g.godot_mode then
     end,
   })
 end
+
+-- stop me from always mistyping
+
+vim.api.nvim_create_user_command('W', function()
+  vim.cmd 'write'
+end, { nargs = '*' })

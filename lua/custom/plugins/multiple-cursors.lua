@@ -14,62 +14,16 @@ return {
     { '<Leader>M', '<Cmd>MultipleCursorsAddVisualArea<CR>', mode = { 'x' }, desc = 'Add cursors to the lines of the visual area' },
 
     { '<Leader>m', '<Cmd>MultipleCursorsAddMatches<CR>', mode = { 'n', 'x' }, desc = 'Add cursors to cword' },
-    --{ '<Leader>A', '<Cmd>MultipleCursorsAddMatchesV<CR>', mode = { 'n', 'x' }, desc = 'Add cursors to cword in previous area' },
+    { '<Leader>A', '<Cmd>MultipleCursorsAddMatchesV<CR>', mode = { 'n', 'x' }, desc = 'Add cursors to cword in previous area' },
 
-    { '<Leader>d', '<Cmd>MultipleCursorsAddJumpNextMatch<CR>', mode = { 'n', 'x' }, desc = 'Add cursor and jump to next cword' },
-    { '<Leader>D', '<Cmd>MultipleCursorsJumpNextMatch<CR>', mode = { 'n', 'x' }, desc = 'Jump to next cword' },
+    { '<Leader>j', '<Cmd>MultipleCursorsAddJumpNextMatch<CR>', mode = { 'n', 'x' }, desc = 'Add cursor and jump to next cword' },
+    { '<Leader>J', '<Cmd>MultipleCursorsJumpNextMatch<CR>', mode = { 'n', 'x' }, desc = 'Jump to next cword' },
 
     { '<Leader>l', '<Cmd>MultipleCursorsLock<CR>', mode = { 'n', 'x' }, desc = 'Lock virtual cursors' },
   },
   config = function(_, opts)
     require('multiple-cursors').setup(opts)
-
-    -- Your original spider config remains unchanged
-    require('spider').setup {
-      skipInsignificantPunctuation = false,
-      consistentOperatorPending = false,
-      subwordMovement = true,
-      customPatterns = {},
-    }
   end,
-  custom_key_maps = {
-    -- w
-    {
-      { 'n', 'x' },
-      'w',
-      function(_, count)
-        if count ~= 0 and vim.api.nvim_get_mode().mode == 'n' then
-          vim.cmd('normal! ' .. count)
-        end
-        require('spider').motion 'w'
-      end,
-    },
-
-    -- e
-    {
-      { 'n', 'x' },
-      'e',
-      function(_, count)
-        if count ~= 0 and vim.api.nvim_get_mode().mode == 'n' then
-          vim.cmd('normal! ' .. count)
-        end
-        require('spider').motion 'e'
-      end,
-    },
-
-    -- b
-    {
-      { 'n', 'x' },
-      'b',
-      function(_, count)
-        if count ~= 0 and vim.api.nvim_get_mode().mode == 'n' then
-          vim.cmd('normal! ' .. count)
-        end
-        require('spider').motion 'b'
-      end,
-    },
-  },
-  dependencies = { 'chrisgrieser/nvim-spider' },
   --[[
   custom_key_maps = {
     -- Override 'w' with spider motion

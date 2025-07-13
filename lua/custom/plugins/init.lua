@@ -11,5 +11,8 @@ return {
   --require 'custom.plugins.multicursor',
   require 'custom.plugins.multiple-cursors',
   require 'custom.plugins.nvim-various-textobjects',
+  --require 'custom.plugins.marko',
+  --require 'custom.plugins.marks',
+  --require 'custom.plugins.nvim-projectmarks',
   --require 'custom.plugins.nvim-treesitter-textobjects',
 }
