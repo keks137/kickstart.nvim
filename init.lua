@@ -190,6 +190,9 @@ vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
 vim.keymap.set('n', '<leader>e', '<cmd>Oil<CR>', { desc = 'Filetree [E]xplorer' })
 vim.keymap.set('n', '<leader>Et', '<cmd>term<CR>', { desc = '[T]erminal' })
 
+-- basic format
+vim.keymap.set('n', '<leader>F', vim.lsp.buf.format, { desc = '[F]ormat' })
+
 -- fancy yank
 
 vim.keymap.set('v', '<leader>y', '<cmd>w !wl-copy<CR>', { desc = '[Y]ank' })
